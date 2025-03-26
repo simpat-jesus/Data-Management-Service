@@ -1,0 +1,21 @@
+name: Release Tag test
+on:
+  workflow_dispatch:
+  
+jobs:
+  tag-dms-image:
+    name: Release Tag DMS Image
+    runs-on: ubuntu-latest
+    env:
+      PRE_TAG: "dms-pre-0.4.0"
+      PRE_IMAGE: "edfialliance/data-management-service:$PRE_TAG"
+      RELEASE_IMAGE: "edfialliance/data-management-service:0.4.0"
+    steps:
+      - name: Pull DMS Prerelease Image
+        run: docker pull $PRE_IMAGE
+
+      - name: Tag DMS image
+        run: docker tag $PRE_IMAGE $RELEASE_IMAGE
+
+      - name: List Images
+        run: docker image list
