@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PRE_TAG: "dms-pre-0.4.0"
-      PRE_IMAGE: "edfialliance/data-management-service:$PRE_TAG"
+      PRE_IMAGE: "edfialliance/data-management-service:${{ env.PRE_TAG }}"
       RELEASE_IMAGE: "edfialliance/data-management-service:0.4.0"
     steps:
       - name: Pull DMS Prerelease Image
-        run: docker pull "$PRE_IMAGE"
+        run: docker pull "${{ env.PRE_IMAGE }}"
 
       - name: Tag DMS image
-        run: docker tag "$PRE_IMAGE" "$RELEASE_IMAGE"
+        run: docker tag "${{ env.PRE_IMAGE }}" "${{ env.RELEASE_IMAGE }}"
 
       - name: List Images
         run: docker image list
